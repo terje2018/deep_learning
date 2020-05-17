@@ -50,7 +50,7 @@ def cross_entropy(probs,labels):
         label = labels[i,:]
         index = (label == 1)
         p = probs[i,index]
-        ce = ce - np.log(p)
+        ce = ce - np.log2(p)#keras这里使用ln，通常使用log2比较合适。
     return ce/length
 
 

@@ -35,7 +35,7 @@ sumt = np.sum(s**2)
 print("predictions mse: "+ str(sumt/len(tx)))
 
 score = model.evaluate(tx, ty, batch_size=8)
-print("score: "+str(score))
+print("score: "+str(score))#与predictions mse计算结果相同。
 model.summary()
 
 plt.scatter(x,y)

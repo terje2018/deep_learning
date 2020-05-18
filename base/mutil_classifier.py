@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from keras.utils.np_utils import to_categorical
 from keras.models import Sequential
 from keras.layers import Dense
+from keras.callbacks import ModelCheckpoint
 
 class1_data = np.random.randn(40,2)
 class1_lable = np.ones((40,1))*0
@@ -22,7 +23,8 @@ y = to_categorical(y,num_classes=3)
 model = Sequential()
 model.add(Dense(3, activation='softmax', input_dim=2))
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-model.fit(x,y, epochs=5000, batch_size=20, shuffle=True)
+filepath = 'ModelWeights-{epoch:.2f}-{accuracy:.2f}.hdf5'
+mc = ModelCheckpoint(filepath, monitor='accuracy', save_best_only=True)
 
 test_class1_data = np.random.randn(10,2)
 test_class2_data = np.random.randn(10,2) + np.array([2.5,2.5])
@@ -37,6 +39,10 @@ test_class3_lable = np.zeros((10,3))
 test_class3_lable[:,2] = 1
 ty = np.append(test_class1_lable,test_class2_lable,axis=0)
 ty = np.append(ty,test_class3_lable,axis=0)
+
+model.fit(x,y, epochs=50, batch_size=10, shuffle=True, callbacks=[mc],validation_data=(tx,ty))
+model.save('model.hdf5')
+
 score = model.evaluate(tx, ty, batch_size=1)
 print("score： " + str(score))
 probs = model.predict_proba(tx)

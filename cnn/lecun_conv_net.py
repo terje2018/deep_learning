@@ -22,7 +22,7 @@ y_train = to_categorical(y_train,num_classes=10)
 y_test = to_categorical(y_test,num_classes=10)
 
 model = Sequential()
-model.add(Conv2D(16,(3,3),activation='relu',kernel_initializer='glorot_normal', input_shape=(28,28,1)))
+model.add(Conv2D(16,(5,5),activation='relu',kernel_initializer='glorot_normal', input_shape=(28,28,1)))
 model.add(MaxPooling2D())
 model.add(Conv2D(32,(3,3),activation='relu',kernel_initializer='glorot_normal'))
 model.add(MaxPooling2D())

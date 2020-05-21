@@ -23,6 +23,6 @@ y_test = to_categorical(y_test,num_classes=10)
 for index in range(16,32,1):
     model = load_model('vgg_conv_net-ModelWeights-'+str(index)+'.00-1.00.hdf5')  # 提供了一种分阶段训练的思路。
     result = model.evaluate(x_test, y_test)
-    print(result)
+    print(result)#最好的结果[0.030993870441384273, 0.9934999942779541]
 
 #model.fit(x_train,y_train, batch_size=32, epochs=24, shuffle=True,validation_data=(x_test,y_test))

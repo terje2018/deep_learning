@@ -44,9 +44,6 @@ for l in validation_labels:
 train_labels_list = to_categorical(train_labels_list,2)
 validation_labels_list = to_categorical(validation_labels_list,2)
 
-#print(train_imgs.shape)
-#print(train_labels)
-
 base_model=ResNet50(include_top=False, weights='imagenet',pooling='max')
 x=base_model.output
 x=Dropout(0.3)(x)
@@ -55,13 +52,12 @@ x=Dropout(0.2)(x)
 x=Dense(512,activation='relu')(x)
 preds=Dense(2,activation='softmax')(x)
 model=Model(inputs=base_model.input,outputs=preds)
-#print(model.summary())
 
 print(len(model.layers))
 
-for layer in model.layers[:176]:
+for layer in model.layers[:140]:
     layer.trainable=False
-for layer in model.layers[176:]:
+for layer in model.layers[140:]:
     layer.trainable=True
 print(model.summary())
 model.compile(optimizer='Adam', loss='categorical_crossentropy', metrics=['accuracy'])

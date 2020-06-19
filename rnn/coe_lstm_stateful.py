@@ -49,9 +49,9 @@ from tensorflow.keras.callbacks import EarlyStopping
 #例如index=1，每次只会改变index=1这个位置的state。
 b_s = 1
 model = Sequential()
-model.add(LSTM(16,activation='tanh',recurrent_activation='hard_sigmoid',return_sequences=True,stateful=True,batch_input_shape=(b_s,4,1)))
+model.add(LSTM(32,activation='tanh',recurrent_activation='hard_sigmoid',return_sequences=True,stateful=True,batch_input_shape=(b_s,4,1)))
 model.add(Dropout(0.3))
-model.add(LSTM(16,activation='tanh',recurrent_activation='hard_sigmoid',stateful=True,batch_input_shape=(b_s,4,1)))
+model.add(LSTM(32,activation='tanh',recurrent_activation='hard_sigmoid',stateful=True,batch_input_shape=(b_s,4,1)))
 model.add(Dropout(0.3))
 model.add(Dense(1,activation='linear'))
 #es = EarlyStopping(patience=24)

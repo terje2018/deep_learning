@@ -56,16 +56,26 @@ model.add(Dropout(0.3))
 model.add(Dense(1,activation='linear'))
 #es = EarlyStopping(patience=24)
 model.compile(optimizer='rmsprop', loss='mean_squared_error', metrics=['mse'])
-model.fit(x_train, y_train,batch_size=b_s,shuffle=True,epochs=500)
+model.fit(x_train, y_train,batch_size=b_s,shuffle=True,epochs=1000)
 #model.reset_states()
 
 result = model.evaluate(x_test,y_test)
 print(result)
 
+"""
 presult=model.predict(x_test)
 print(presult - y_test)
-
-
 plt.plot(presult,'r')
 plt.plot(y_test,'g')
+plt.show()
+"""
+
+#对于coe数据的拟合，比没有stateful的simple cnn要好一些。
+xnp = xnp.reshape(xnp.shape + (1,))
+result = model.evaluate(xnp,ynp)
+print(result)
+presult=model.predict(xnp)
+print(presult - ynp)
+plt.plot(presult,'r')
+plt.plot(ynp,'g')
 plt.show()
